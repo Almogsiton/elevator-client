@@ -11,4 +11,7 @@ export const register = (email, password) =>
 export const getBuildings = (userId) =>
   axios.get(`${API_BASE_URL}/building/byUser/${userId}`);
 
+export const createBuilding = (buildingData) =>
+  axios.post(`${API_BASE_URL}/building/create`, buildingData);
+
 
