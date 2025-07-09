@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/apiService";
 import "../styles/auth.css";
 
+
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
