@@ -9,22 +9,17 @@ export default function BuildingsPage() {
   const userId = parseInt(localStorage.getItem("userId"));
 
   useEffect(() => {
-    console.log("userId from localStorage (parsed):", userId);
-
     if (!userId || isNaN(userId)) {
       navigate("/");
       return;
     }
 
-    console.log("Fetching buildings for userId:", userId);
     getBuildings(userId)
       .then((res) => {
-        console.log("API response:", res);
         const data = Array.isArray(res.data) ? res.data : [];
         setBuildings(data);
       })
       .catch((err) => {
-        console.error("Failed to load buildings:", err);
         alert("Failed to load buildings");
         navigate("/");
       });
@@ -49,6 +44,12 @@ export default function BuildingsPage() {
             <div key={b.id} className="building-card">
               <h3>{b.name}</h3>
               <p>{b.numberOfFloors} floors</p>
+              <button
+                className="enter-button"
+                onClick={() => navigate(`/buildings/${b.id}`)}
+              >
+                View Simulation
+              </button>
             </div>
           ))}
         </div>

@@ -14,4 +14,8 @@ export const getBuildings = (userId) =>
 export const createBuilding = (buildingData) =>
   axios.post(`${API_BASE_URL}/building/create`, buildingData);
 
+export const getBuildingDetails = (buildingId) =>
+  axios.get(`${API_BASE_URL}/building/${buildingId}`);
+
+
 
