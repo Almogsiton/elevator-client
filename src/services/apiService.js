@@ -1,21 +1,35 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5145/api";
+export async function register(email, password, confirmPassword) {
+  return axios.post("/api/user/register", {
+    email,
+    password,
+    confirmPassword,
+  });
+}
 
-export const login = (email, password) =>
-  axios.post(`${API_BASE_URL}/user/login`, { email, password });
+export async function login(email, password) {
+  return axios.post("/api/user/login", {
+    email,
+    password,
+  });
+}
 
-export const register = (email, password) =>
-  axios.post(`${API_BASE_URL}/user/register`, { email, password });
+export async function createBuilding(buildingData) {
+  return axios.post("/api/building", buildingData);
+}
 
-export const getBuildings = (userId) =>
-  axios.get(`${API_BASE_URL}/building/byUser/${userId}`);
+export async function getFloorLimits() {
+  return axios.get("/api/config/floor-limits");
+}
 
-export const createBuilding = (buildingData) =>
-  axios.post(`${API_BASE_URL}/building/create`, buildingData);
+export async function getBuildings(userId) {
+  return axios.get(`/api/building/${userId}`);
+}
 
-export const getBuildingDetails = (buildingId) =>
-  axios.get(`${API_BASE_URL}/building/${buildingId}`);
+export async function deleteBuilding(id) {
+  return axios.delete(`/api/building/${id}`);
+}
 
 
 

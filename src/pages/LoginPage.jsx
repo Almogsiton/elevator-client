@@ -1,9 +1,8 @@
 // src/pages/LoginPage.jsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/apiService";
 import "../styles/auth.css";
-
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -24,8 +23,12 @@ export default function LoginPage() {
       const user = res.data;
       localStorage.setItem("userId", user.id);
       navigate("/buildings");
-    } catch {
-      setError("Login failed");
+    } catch (err) {
+      if (err.response && err.response.data) {
+        setError(err.response.data);
+      } else {
+        setError("Login failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -58,8 +61,7 @@ export default function LoginPage() {
           </button>
         </form>
         <p>
-          Don't have an account?{" "}
-          <button onClick={() => navigate("/register")}>Register</button>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>
