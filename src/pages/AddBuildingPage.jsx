@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { createBuilding, getFloorLimits } from "../services/apiService";
+import { addBuilding } from "../services/apiService";
 import "../styles/addBuilding.css";
 import Header from "../components/Header";
 
@@ -13,15 +13,6 @@ export default function AddBuildingPage() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
-  useEffect(() => {
-    getFloorLimits()
-      .then((res) => {
-        setMinFloors(res.data.minFloors);
-        setMaxFloors(res.data.maxFloors);
-      })
-      .catch(() => {});
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const numFloors = parseInt(floors);
@@ -32,7 +23,7 @@ export default function AddBuildingPage() {
     }
 
     try {
-      await createBuilding({
+      await addBuilding({
         name,
         numberOfFloors: numFloors,
         userId: parseInt(userId),

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getBuildings, deleteBuilding } from "../services/apiService";
+import { getUserBuildings, deleteBuilding } from "../services/apiService";
 import "../styles/buildings.css";
 import Header from "../components/Header";
 
@@ -26,7 +26,7 @@ export default function BuildingsPage() {
       return;
     }
 
-    getBuildings(userId)
+    getUserBuildings(userId)
       .then((res) => {
         setBuildings(res.data);
       })

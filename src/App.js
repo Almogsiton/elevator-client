@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import BuildingsPage from "./pages/BuildingsPage";
 import AddBuildingPage from "./pages/AddBuildingPage";
 import ContactPage from "./pages/ContactPage";
+import BuildingSimulationPage from "./pages/BuildingSimulationPage";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/buildings" element={<BuildingsPage />} />
         <Route path="/buildings/add" element={<AddBuildingPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/buildings/:id" element={<BuildingSimulationPage />} />
+
       </Routes>
     </BrowserRouter>
   );

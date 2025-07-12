@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios from "./axiosInstance";
 
+// Authentication
 export async function register(email, password, confirmPassword) {
-  return axios.post("/api/user/register", {
+  return axios.post("/users/register", {
     email,
     password,
     confirmPassword,
@@ -9,27 +10,38 @@ export async function register(email, password, confirmPassword) {
 }
 
 export async function login(email, password) {
-  return axios.post("/api/user/login", {
+  return axios.post("/users/login", {
     email,
     password,
   });
 }
 
-export async function createBuilding(buildingData) {
-  return axios.post("/api/building", buildingData);
+// Building
+export async function addBuilding(buildingData) {
+  return axios.post("/buildings/add", buildingData);
 }
 
-export async function getFloorLimits() {
-  return axios.get("/api/config/floor-limits");
-}
-
-export async function getBuildings(userId) {
-  return axios.get(`/api/building/${userId}`);
+export async function getUserBuildings(userId) {
+  return axios.get(`/buildings/get/user/${userId}`);
 }
 
 export async function deleteBuilding(id) {
-  return axios.delete(`/api/building/${id}`);
+  return axios.delete(`/buildings/delete/${id}`);
 }
 
+export async function getBuilding(buildingId) {
+  return axios.get(`/buildings/get/${buildingId}`);
+}
 
+// Elevator Simulation
+export async function getElevatorStatus(buildingId) {
+  return axios.get(`/elevators/get/status/building/${buildingId}`);
+}
 
+export async function callElevator(buildingId, requestedFloor, destinationFloor = null) {
+  return axios.post("/elevatorcall", {
+    buildingId,
+    requestedFloor,
+    destinationFloor
+  });
+}
